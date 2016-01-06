@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie的读取和设置</title>
+	<link rel="stylesheet" id="skin" href="css/skin0.css"/>
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <style>
+		html,body{
+			margin: 0;
+			padding: 20px;
+			font-size: 14px;
+		}
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style:none;
+			float: left;
+		}
+		ul li{
+			float: left;
+			margin: 10px;
+			padding: 5px 15px;
+			border:solid 1px silver;
+			cursor:pointer;
+			border-radius:5px;
+
+		}
+
+		#skin_view{
+			clear:both;
+			width: 550px;
+			height: 350px;
+			border-radius:10px;
+
+		}
+    </style>
+    <script>
+    	$(function(){
+    		if($.cookie('pifu')){
+    			$("#skin").attr("href","css/"+$.cookie('pifu')+".css");
+    		}else{
+    			$("#skin").attr("href","css/skin0.css");
+    		}
+    		for(var i=0;i<$("ul li").size();i++){
+    			$("ul li").eq(i).click(function(){
+    				var style=$(this).attr("class");
+    				$("#skin").attr("href","css/"+style+".css");
+    				$.cookie('pifu',style,{
+    					path:"/",
+    					expirse:1
+    				})
+    			})
+    		}
+    	})
+    </script>
+</head>
+<body>
+	<ul>
+		<li class="skin0">默认</li>
+		<li class="skin1">皮肤1</li>
+		<li class="skin2">皮肤2</li>
+		<li class="skin3">皮肤3</li>
+		<li class="skin4">皮肤4</li>
+		<li class="skin5">皮肤5</li>
+	</ul>
+	<div id="skin_view">
+		
+	</div>
+	
+</body>
+</html>

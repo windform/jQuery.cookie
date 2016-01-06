@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹窗cookie设置</title>
+</head>
+<body>
+	<button id="btn">cookie判断弹窗</button>
+<script>
+window.onload=function(){
+	var btn=document.getElementById("btn");
+	btn.onclick=function(){
+		LoadPop();
+	}
+}
+
+function openWin(){
+	var win=window.open('ad.html','new','width=600,height=400');
+	win.moveTo((screen.width-600)/2,(screen.height-400)/2);
+}
+
+function GetCookie(name){
+	var search=name+"=";
+	var returnvalue="";
+	var offset,end;
+	if(document.cookie.length>0){
+		offset=document.cookie.indexOf(search);
+		if(offset!=-1){
+			offset+=search.length;
+			end=document.cookie.indexOf(";",offset);
+			if(end==-1){end=document.cookie.length};
+			returnvalue=unescape(document.cookie.substring(offset,end))
+		}
+	}
+	return returnvalue;
+}
+function LoadPop(){
+	if(GetCookie("pop")==""){
+		openWin();
+		var today=new Date();
+		var time=today.getYear()+"-"+today.getMonth()+"-"+today.getDate();
+		document.cookie="pop=yes;expires="+time;
+	}
+}
+
+</script>
+</body>
+</html>
